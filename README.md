@@ -29,13 +29,23 @@ At the end of the day, my work would be defining the work that needs to be done 
 
 ## Projects to Tackle
 [] Calculator
+
 [] 2 way chat
+
 [] Roblox game
+
 [] Service Creator
+
 [] Website Templates
+
 [] Todo Checklist
-[] Contacts application
+
+[] Contacts
+
 [] Instagram Clone
+
 [] Social Media App
+
 [] Sports App for managing play time and team rosters
+
 [] Tournament/Bracket Maker
