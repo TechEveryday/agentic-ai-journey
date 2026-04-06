@@ -34,7 +34,7 @@ At the end of the day, my work would be defining the work that needs to be done 
 ## Projects Completed
 
 - [x] **Calculator** (`projects/calculator/`) - Web-based calculator with addition, subtraction, multiplication, and division. Built by Claude Haiku 4.5 on 2026-03-27. See [Day 3 entry](DailyEntries/2026/March/27.md) for implementation details.
-- [x]  **Todo Checklist** (`projects/todo-checklist/`) - Single-user todo app with localStorage persistence, clean architecture (presentation/application/infrastructure/core layers), Material-UI components, and comprehensive unit/integration/E2E tests. Completed on 2026-04-06. See [Day 6 entry](DailyEntries/2026/April/06.md) for implementation details.   
+- [x]  **Todo Checklist** (`projects/todo-checklist/`) - Single-user todo app with localStorage persistence, clean architecture (presentation/application/infrastructure/core layers), Material-UI components, and comprehensive unit/integration/E2E tests. Completed on 2026-04-06. See [Day 4 entry](DailyEntries/2026/April/06.md) for implementation details.   
 
 ## Projects to Tackle
 
