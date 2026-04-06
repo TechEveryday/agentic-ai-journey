@@ -11,6 +11,7 @@ This file tracks the context for future sessions of our collaborative journey.
 
 ## Applied Lessons
 - [ai-as-solo-generator](../lessons/ai-as-solo-generator.md) — Don't treat AI as standalone code generator
+- [git-workflow-and-node-versioning](../lessons/git-workflow-and-node-versioning.md) — Never work on main, always pin Node version
 
 ---
 

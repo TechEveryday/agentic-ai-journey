@@ -7,6 +7,7 @@ Use this as a starting point when creating new projects in /projects/{project_na
 ```
 projects/{project_name}/
 ├── README.md                 # Project overview, requirements, tech stack
+├── .nvmrc                    # Node.js version pin (REQUIRED)
 ├── src/                      # Source code
 │   ├── core/                # Business logic (domain layer)
 │   ├── application/         # Application services
@@ -61,8 +62,9 @@ projects/{project_name}/
 
 ## Code Review Checklist
 
-- [ ] Tests pass locally
-- [ ] Test coverage meets standards
+- [ ] .nvmrc file exists and is pinned to appropriate Node version
+- [ ] Tests pass locally (npm test: 100% passing)
+- [ ] Test coverage meets standards (>80%)
 - [ ] Code follows Clean Architecture principles
 - [ ] No hardcoded credentials or secrets
 - [ ] Error handling is appropriate

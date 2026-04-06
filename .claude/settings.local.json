@@ -7,7 +7,9 @@
       "Bash(git checkout:*)",
       "Bash(git cherry-pick:*)",
       "Bash(nvm use:*)",
-      "Bash(nvm install:*)"
+      "Bash(nvm install:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m ':*)"
     ]
   }
 }
