@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { TodoForm } from '@/presentation/components/TodoForm';
 
@@ -9,7 +9,9 @@ describe('TodoForm', () => {
     render(<TodoForm onAdd={onAdd} />);
 
     expect(screen.getByPlaceholderText('Add a new todo...')).toBeInTheDocument();
-    expect(screen.getByRole('button')).toBeInTheDocument();
+    // Find the add button in the box (skip form buttons)
+    const buttons = screen.getAllByRole('button');
+    expect(buttons.length).toBeGreaterThan(0);
   });
 
   it('should show validation error for empty title', async () => {
@@ -18,8 +20,8 @@ describe('TodoForm', () => {
 
     render(<TodoForm onAdd={onAdd} />);
 
-    const button = screen.getByRole('button');
-    await user.click(button);
+    const buttons = screen.getAllByRole('button');
+    await user.click(buttons[0]); // Click first button (add button)
 
     expect(screen.getByText('Title cannot be empty')).toBeInTheDocument();
     expect(onAdd).not.toHaveBeenCalled();
@@ -36,8 +38,8 @@ describe('TodoForm', () => {
     ) as HTMLInputElement;
     await user.type(input, '  Test todo  ');
 
-    const button = screen.getByRole('button');
-    await user.click(button);
+    const buttons = screen.getAllByRole('button');
+    await user.click(buttons[0]);
 
     expect(onAdd).toHaveBeenCalledWith('Test todo');
   });
@@ -53,8 +55,8 @@ describe('TodoForm', () => {
     ) as HTMLInputElement;
     await user.type(input, 'Test todo');
 
-    const button = screen.getByRole('button');
-    await user.click(button);
+    const buttons = screen.getAllByRole('button');
+    await user.click(buttons[0]);
 
     await waitFor(() => {
       expect(input.value).toBe('');
@@ -70,13 +72,13 @@ describe('TodoForm', () => {
     render(<TodoForm onAdd={onAdd} />);
 
     const input = screen.getByPlaceholderText('Add a new todo...');
-    const button = screen.getByRole('button');
+    const buttons = screen.getAllByRole('button');
 
     await user.type(input, 'Test todo');
-    await user.click(button);
+    await user.click(buttons[0]);
 
     expect(input).toBeDisabled();
-    expect(button).toBeDisabled();
+    expect(buttons[0]).toBeDisabled();
 
     await waitFor(() => {
       expect(input).not.toBeDisabled();
@@ -101,9 +103,9 @@ describe('TodoForm', () => {
     render(<TodoForm onAdd={onAdd} disabled={true} />);
 
     const input = screen.getByPlaceholderText('Add a new todo...');
-    const button = screen.getByRole('button');
+    const buttons = screen.getAllByRole('button');
 
     expect(input).toBeDisabled();
-    expect(button).toBeDisabled();
+    expect(buttons[0]).toBeDisabled();
   });
 });

@@ -1,5 +1,5 @@
 import { describe, it, expect, beforeEach } from 'vitest';
-import { renderHook, waitFor } from '@testing-library/react';
+import { renderHook, waitFor, act } from '@testing-library/react';
 import { useTodos } from '@/application';
 import { createTodo, TodoStatus } from '@/core';
 import { MockTodoRepository } from './MockTodoRepository';
@@ -48,9 +48,14 @@ describe('TodoPage Integration (useTodos hook)', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    await result.current.addTodo('New todo');
+    await act(async () => {
+      await result.current.addTodo('New todo');
+    });
 
-    expect(result.current.todos).toHaveLength(1);
+    await waitFor(() => {
+      expect(result.current.todos).toHaveLength(1);
+    });
+
     expect(result.current.todos[0].title).toBe('New todo');
     expect(result.current.todos[0].status).toBe(TodoStatus.Incomplete);
   });
@@ -62,7 +67,9 @@ describe('TodoPage Integration (useTodos hook)', () => {
       expect(result.current.isLoading).toBe(false);
     });
 
-    await result.current.addTodo('');
+    await act(async () => {
+      await result.current.addTodo('');
+    });
 
     expect(result.current.todos).toHaveLength(0);
     expect(result.current.error).toBeTruthy();
@@ -80,13 +87,21 @@ describe('TodoPage Integration (useTodos hook)', () => {
 
     const todoId = result.current.todos[0].id;
 
-    await result.current.toggleTodo(todoId);
+    await act(async () => {
+      await result.current.toggleTodo(todoId);
+    });
 
-    expect(result.current.todos[0].status).toBe(TodoStatus.Complete);
+    await waitFor(() => {
+      expect(result.current.todos[0].status).toBe(TodoStatus.Complete);
+    });
 
-    await result.current.toggleTodo(todoId);
+    await act(async () => {
+      await result.current.toggleTodo(todoId);
+    });
 
-    expect(result.current.todos[0].status).toBe(TodoStatus.Incomplete);
+    await waitFor(() => {
+      expect(result.current.todos[0].status).toBe(TodoStatus.Incomplete);
+    });
   });
 
   it('should update todo title', async () => {
@@ -101,9 +116,13 @@ describe('TodoPage Integration (useTodos hook)', () => {
 
     const todoId = result.current.todos[0].id;
 
-    await result.current.updateTodo(todoId, 'Updated');
+    await act(async () => {
+      await result.current.updateTodo(todoId, 'Updated');
+    });
 
-    expect(result.current.todos[0].title).toBe('Updated');
+    await waitFor(() => {
+      expect(result.current.todos[0].title).toBe('Updated');
+    });
   });
 
   it('should delete a todo', async () => {
@@ -121,9 +140,14 @@ describe('TodoPage Integration (useTodos hook)', () => {
 
     expect(result.current.todos).toHaveLength(2);
 
-    await result.current.deleteTodo(todo1.id);
+    await act(async () => {
+      await result.current.deleteTodo(todo1.id);
+    });
 
-    expect(result.current.todos).toHaveLength(1);
+    await waitFor(() => {
+      expect(result.current.todos).toHaveLength(1);
+    });
+
     expect(result.current.todos[0].id).toBe(todo2.id);
   });
 
@@ -135,22 +159,44 @@ describe('TodoPage Integration (useTodos hook)', () => {
     });
 
     // Add
-    await result.current.addTodo('Task 1');
-    await result.current.addTodo('Task 2');
-    expect(result.current.todos).toHaveLength(2);
+    await act(async () => {
+      await result.current.addTodo('Task 1');
+      await result.current.addTodo('Task 2');
+    });
+
+    await waitFor(() => {
+      expect(result.current.todos).toHaveLength(2);
+    });
 
     // Update
     const task1Id = result.current.todos[0].id;
-    await result.current.updateTodo(task1Id, 'Task 1 Updated');
-    expect(result.current.todos[0].title).toBe('Task 1 Updated');
+
+    await act(async () => {
+      await result.current.updateTodo(task1Id, 'Task 1 Updated');
+    });
+
+    await waitFor(() => {
+      expect(result.current.todos[0].title).toBe('Task 1 Updated');
+    });
 
     // Toggle
-    await result.current.toggleTodo(task1Id);
-    expect(result.current.todos[0].status).toBe(TodoStatus.Complete);
+    await act(async () => {
+      await result.current.toggleTodo(task1Id);
+    });
+
+    await waitFor(() => {
+      expect(result.current.todos[0].status).toBe(TodoStatus.Complete);
+    });
 
     // Delete
-    await result.current.deleteTodo(task1Id);
-    expect(result.current.todos).toHaveLength(1);
+    await act(async () => {
+      await result.current.deleteTodo(task1Id);
+    });
+
+    await waitFor(() => {
+      expect(result.current.todos).toHaveLength(1);
+    });
+
     expect(result.current.todos[0].title).toBe('Task 2');
   });
 });

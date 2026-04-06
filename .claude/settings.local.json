@@ -1,7 +1,13 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git config:*)"
+      "Bash(npm install:*)",
+      "Bash(npm test:*)",
+      "Bash(git fetch:*)",
+      "Bash(git checkout:*)",
+      "Bash(git cherry-pick:*)",
+      "Bash(nvm use:*)",
+      "Bash(nvm install:*)"
     ]
   }
 }

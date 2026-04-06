@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { TodoItem } from '@/presentation/components/TodoItem';
 import { createTodo, TodoStatus } from '@/core';
@@ -80,8 +80,8 @@ describe('TodoItem', () => {
       />
     );
 
-    const editButton = screen.getAllByRole('button')[0]; // First button is edit
-    await user.click(editButton);
+    const buttons = screen.getAllByRole('button');
+    await user.click(buttons[0]); // Edit button
 
     const input = screen.getByDisplayValue('Test todo');
     expect(input).toBeInTheDocument();
@@ -102,8 +102,8 @@ describe('TodoItem', () => {
       />
     );
 
-    const editButton = screen.getAllByRole('button')[0];
-    await user.click(editButton);
+    const buttons = screen.getAllByRole('button');
+    await user.click(buttons[0]); // Edit button
 
     const input = screen.getByDisplayValue('Test todo');
     await user.clear(input);
@@ -128,8 +128,8 @@ describe('TodoItem', () => {
       />
     );
 
-    const editButton = screen.getAllByRole('button')[0];
-    await user.click(editButton);
+    const buttons = screen.getAllByRole('button');
+    await user.click(buttons[0]); // Edit button
 
     const input = screen.getByDisplayValue('Test todo');
     await user.clear(input);
@@ -155,8 +155,8 @@ describe('TodoItem', () => {
       />
     );
 
-    const deleteButton = screen.getAllByRole('button')[1]; // Second button is delete
-    await user.click(deleteButton);
+    const buttons = screen.getAllByRole('button');
+    await user.click(buttons[1]); // Delete button
 
     expect(onDelete).toHaveBeenCalledWith(mockTodo.id);
   });
