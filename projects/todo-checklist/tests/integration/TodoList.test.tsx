@@ -1,12 +1,18 @@
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import { TodoList } from '@/presentation/components/TodoList';
 import { createTodo } from '@/core';
 
 describe('TodoList', () => {
-  const onToggle = vi.fn();
-  const onUpdate = vi.fn();
-  const onDelete = vi.fn();
+  let onToggle: ReturnType<typeof vi.fn>;
+  let onUpdate: ReturnType<typeof vi.fn>;
+  let onDelete: ReturnType<typeof vi.fn>;
+
+  beforeEach(() => {
+    onToggle = vi.fn();
+    onUpdate = vi.fn();
+    onDelete = vi.fn();
+  });
 
   it('should render EmptyState when no todos', () => {
     render(
@@ -41,7 +47,7 @@ describe('TodoList', () => {
   it('should render correct number of TodoItem components', () => {
     const todos = [createTodo('Todo 1'), createTodo('Todo 2'), createTodo('Todo 3')];
 
-    render(
+    const { container } = render(
       <TodoList
         todos={todos}
         onToggle={onToggle}
@@ -50,7 +56,9 @@ describe('TodoList', () => {
       />
     );
 
-    const checkboxes = screen.getAllByRole('checkbox');
+    // Material-UI List renders as <ul>, get checkboxes from it
+    const list = container.querySelector('ul');
+    const checkboxes = list ? list.querySelectorAll('input[type="checkbox"]') : [];
     expect(checkboxes).toHaveLength(3);
   });
 });

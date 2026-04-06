@@ -32,7 +32,7 @@ export function TodoForm({ onAdd, disabled = false }: TodoFormProps) {
     try {
       setError(null);
       setIsSubmitting(true);
-      await onAdd(title);
+      await onAdd(title.trim());
       setTitle(''); // Clear on success
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Failed to add todo';
