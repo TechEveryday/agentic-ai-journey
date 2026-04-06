@@ -3,22 +3,31 @@
 ## Context
 This is your session initialization checklist. Follow these steps at the start of each session to ensure we're aligned on goals, progress, and learnings.
 
-### Step 0: Git Workflow & Node Version (CRITICAL - DO THIS FIRST)
+### Step 0: Git Workflow & Node/React Version (CRITICAL - DO THIS FIRST)
 ```
-1. Ensure Node.js is correctly pinned:
+1. Ensure Node.js is correctly pinned and using 20+:
    nvm use  # Reads .nvmrc automatically from repo root
+   node --version  # Should be v20.11.0 or newer
 
-2. Verify you're NOT on main branch:
+2. If Node version is wrong, update .nvmrc:
+   echo "20.11.0" > .nvmrc
+   nvm use
+
+3. For React projects, verify React 19+:
+   npm list react  # Should show 19.x.x
+
+4. Verify you're NOT on main branch:
    git branch  # Should NOT show * main
 
-3. If you're on main, create a feature branch:
+5. If you're on main, create a feature branch:
    git checkout -b feature/your-feature origin/main
 
-4. Fetch latest from origin:
+6. Fetch latest from origin:
    git fetch origin
 
 RULE: Never commit to main directly. Always work on feature branches.
-RULE: Every project must have .nvmrc with explicit Node version.
+RULE: Every project must have .nvmrc pinned to Node 20+ (minimum 20.11.0).
+RULE: React projects must use React 19+ (minimum 19.0.0).
 ```
 
 ### Step 1: Review Lessons Learned

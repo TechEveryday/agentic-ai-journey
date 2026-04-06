@@ -5,6 +5,8 @@ This is the starting point for every Claude Code session. Read this first.
 ## Quick Start
 
 0. **Verify Node version** → `nvm use` (reads `.nvmrc` automatically)
+   - Must be Node 20.11.0+ (run `node --version` to verify)
+   - If wrong version, update `.nvmrc` and `nvm use` again
 
 1. **Verify you're NOT on main** → `git branch` (should NOT show `* main`)
    - If on main: Create feature branch: `git checkout -b feature/your-feature origin/main`
@@ -60,7 +62,8 @@ This is the starting point for every Claude Code session. Read this first.
 ## Tech Stack Reference
 
 **Backend**: C# / .NET  
-**Frontend**: React + Material-UI  
+**Frontend**: React 19+ + Material-UI v5+  
+**Node.js**: 20.11.0 minimum (20+ required for all projects)  
 **Database**: SQL (Postgres preferred)  
 **Deployment**: Fly.io with Docker  
 **Architecture**: Clean Architecture (Robert Martin)  

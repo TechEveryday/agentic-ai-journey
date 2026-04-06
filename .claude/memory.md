@@ -12,6 +12,7 @@ This file tracks the context for future sessions of our collaborative journey.
 ## Applied Lessons
 - [ai-as-solo-generator](../lessons/ai-as-solo-generator.md) — Don't treat AI as standalone code generator
 - [git-workflow-and-node-versioning](../lessons/git-workflow-and-node-versioning.md) — Never work on main, always pin Node version
+- [node-react-versions](../lessons/node-react-versions.md) — Always use Node 20+ and React 19+ for new projects
 
 ---
 
