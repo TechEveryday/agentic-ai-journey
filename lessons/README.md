@@ -24,65 +24,46 @@ When documenting a new lesson, use this format:
 ```markdown
 # Lesson: [Clear, descriptive title]
 
-**Date Discovered:** YYYY-MM-DD
-**Agent:** [Agent name, e.g., "Claude Haiku 4.5"]
-**Severity:** High / Medium / Low
-**Tags:** [comma-separated tags for easy filtering, e.g., "JavaScript, performance, state-management"]
+## The Lesson
 
-## The Problem
+The rule, in one or two sentences. A future agent should be able to read
+only this section and act correctly.
 
-Describe what went wrong or what was non-obvious. What did the agent do initially, and why was it wrong?
+## What Happened (Day N)
 
-Example: "Initial attempt to cache calculations in a global variable caused stale state when multiple calculator instances were on the same page."
+The concrete story. What was done, what broke, what it cost. Be specific —
+"a foreign app was serving on port 5173" teaches; "there was a conflict"
+doesn't.
 
 ## Root Cause
 
-Why did this happen? What assumptions were incorrect?
+Which assumption was wrong. Not the symptom — the reason the symptom was
+possible.
 
-Example: "Didn't account for multiple independent calculator instances sharing the same global scope."
+## The Solution
 
-## Solution / Approach
+The correct approach, with code or commands where they help.
 
-What's the correct way to handle this?
+## How to Apply
 
-Example: "Use instance-level properties or closures to maintain separate state for each calculator instance."
+What a future agent should actually do differently, and when. Include the
+generalizable version, not just this instance.
 
-## Prevention
+## Status
 
-How can future agents avoid this? What should they check or consider?
-
-Example: "When implementing UI components, always consider: Can there be multiple instances? Should state be global or instance-level?"
-
-## Example
-
-Provide code or a concrete scenario demonstrating the problem and solution.
-
-```javascript
-// ❌ WRONG: Global state shared across instances
-let result = 0;
-const Calculator = function() {
-  this.add = function(n) { result += n; };
-};
-
-// ✅ CORRECT: Instance-level state
-const Calculator = function() {
-  let result = 0;
-  this.add = function(n) { result += n; };
-};
-```
+✅ Applied going forward — [what changed as a result]
+⚠️ Outstanding — [anything still unfixed, stated honestly]
 
 ## Related Files
 
-[Optional] Link to relevant files in the codebase if applicable.
-
-Example: `projects/calculator/calculator.js`
+Paths that show the problem or the fix. Link related lessons with [[slug]].
 ```
 
 ## How to Use
 
 **When discovering a lesson:**
 1. Create a new markdown file in this directory
-2. Use the filename format: `lesson-[topic-slug].md` (e.g., `lesson-calculator-state-management.md`)
+2. Use a descriptive kebab-case filename (e.g., `parallel-agents-and-shared-ports.md`)
 3. Fill in the template with concrete details
 4. Commit the file
 
@@ -93,9 +74,15 @@ Example: `projects/calculator/calculator.js`
 
 ## Current Lessons
 
-None yet—the first lessons will be documented as the project discovers them!
+| Lesson | The rule, in short |
+|---|---|
+| [ai-as-solo-generator](ai-as-solo-generator.md) | AI is a pair programmer, not a solo developer. Scaffold, test incrementally, and step in when it loops. |
+| [git-workflow-and-node-versioning](git-workflow-and-node-versioning.md) | **CRITICAL.** Never commit to main. Always pin Node with `.nvmrc`. |
+| [node-react-versions](node-react-versions.md) | **CRITICAL.** Node 20.11.0+, React 19+ for every new project. |
+| [parallel-agents-and-shared-ports](parallel-agents-and-shared-ports.md) | Worktrees isolate files, not ports. Parallel agents can E2E against the wrong app. |
+| [template-drift-and-broken-scripts](template-drift-and-broken-scripts.md) | Run a reference's scripts before cloning it. `npm test` is not the whole gate. |
 
 ---
 
-*Last updated: 2026-03-27*
+*Last updated: 2026-07-14*
 *Maintained by: AI Agents in the agentic-ai-journey project*
