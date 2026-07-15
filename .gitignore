@@ -1,0 +1,27 @@
+# Claude Code agent worktrees — transient, never commit
+.claude/worktrees/
+
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Test artifacts
+coverage/
+playwright-report/
+test-results/
+
+# Environment
+.env
+.env.local
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / IDE
+.DS_Store
+.idea/
+*.swp

@@ -24,34 +24,24 @@ At the end of the day, my work would be defining the work that needs to be done 
 
 - **`DailyEntries/`** - Daily reflections and progress logs organized by date (YYYY/Month/DD.md)
 - **`lessons/`** - Documented lessons learned by agents to prevent future mistakes (see [lessons/README.md](lessons/README.md) for template and guidance)
+- **`planning/`** - Design plans for scoped-but-not-yet-built projects (see [planning/README.md](planning/README.md))
 - **`projects/`** - Development projects and applications built during the journey
-  - `projects/calculator/` - Web-based calculator with basic math operations
-
-## Projects In Progress
-
-
 
 ## Projects Completed
 
-- [x] **Calculator** (`projects/calculator/`) - Web-based calculator with addition, subtraction, multiplication, and division. Built by Claude Haiku 4.5 on 2026-03-27. See [Day 3 entry](DailyEntries/2026/March/27.md) for implementation details.
-- [x]  **Todo Checklist** (`projects/todo-checklist/`) - Single-user todo app with localStorage persistence, clean architecture (presentation/application/infrastructure/core layers), Material-UI components, and comprehensive unit/integration/E2E tests. Completed on 2026-04-06. See [Day 4 entry](DailyEntries/2026/April/06.md) for implementation details.   
+- [x] **Calculator** (`projects/calculator/`) - Web-based calculator with addition, subtraction, multiplication, and division. Built by Claude Haiku 4.5 on 2026-03-27. See [Day 3 entry](DailyEntries/2026/March/27.md).
+- [x] **Todo Checklist** (`projects/todo-checklist/`) - Single-user todo app with localStorage persistence, clean architecture, Material-UI, and unit/integration/E2E tests. Completed 2026-04-06. See [Day 4 entry](DailyEntries/2026/April/06.md). ⚠️ *Needs a cleanup pass — see [template-drift lesson](lessons/template-drift-and-broken-scripts.md).*
+- [x] **Contacts** (`projects/contacts/`) - Contact management with search, React 19 + MUI 5, clean architecture, localStorage. 76 unit/integration tests + 20 E2E, 94.78% coverage. Built by Claude Sonnet on 2026-07-14. See [Day 5 entry](DailyEntries/2026/July/14.md).
+- [x] **Tournament/Bracket Maker** (`projects/tournament-bracket/`) - Single-elimination brackets with standard seeding and byes for non-power-of-2 fields. Pure, heavily-tested domain logic. 65 unit/integration tests + 7 E2E, 93.32% coverage. Built by Claude Sonnet on 2026-07-14. See [Day 5 entry](DailyEntries/2026/July/14.md).
+- [x] **2-way Chat** (`projects/two-way-chat/`) - Real-time chat. **The repo's first backend:** ASP.NET Core 10 + SignalR, clean architecture in C#, with a React 19 client behind a swappable transport port. 26 xUnit + 31 frontend tests + a two-browser-context E2E. Built by Claude Sonnet on 2026-07-14. See [Day 5 entry](DailyEntries/2026/July/14.md).
 
 ## Projects to Tackle
 
-[] 2 way chat
+Plans for these live in [`planning/`](planning/) — each is self-contained enough to start from.
 
-[] Roblox game
-
-[] Service Creator
-
-[] Website Templates
-
-[] Contacts
-
-[] Instagram Clone
-
-[] Social Media App
-
-[] Sports App for managing play time and team rosters
-
-[] Tournament/Bracket Maker
+- [ ] **[Instagram Clone](planning/instagram-clone.md)** - Frontend-only, localStorage + data URLs. Ready to build.
+- [ ] **[Sports App](planning/sports-team-manager.md)** - Roster management with a fair play-time rotation algorithm. Ready to build.
+- [ ] **[Website Templates](planning/website-templates.md)** - Starter gallery of landing pages and site templates. Ready to build.
+- [ ] **[Service Creator](planning/service-creator.md)** - Generates a clean-architecture .NET service from a template. *Sequenced after 2-way Chat, whose backend becomes the template it emits.*
+- [ ] **[Social Media App](planning/social-media-app.md)** - ⛔ **Blocked:** needs a one-line differentiator from Instagram Clone + 2-way Chat, or it's a third copy of the same feed.
+- [ ] **[Roblox Game](planning/roblox-game.md)** - ⛔ **Blocked:** no Luau runtime installed, and no game concept yet.
