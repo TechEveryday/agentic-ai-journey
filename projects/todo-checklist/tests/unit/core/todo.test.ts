@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Todo, TodoStatus, createTodo } from '@/core/todo';
+import { TodoStatus, createTodo } from '@/core/todo';
 
 describe('Todo Type', () => {
   it('should have correct TodoStatus enum values', () => {

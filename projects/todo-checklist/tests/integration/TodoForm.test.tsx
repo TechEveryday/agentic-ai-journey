@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest';
-import { render, screen, waitFor, within } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { TodoForm } from '@/presentation/components/TodoForm';
 
@@ -65,7 +65,7 @@ describe('TodoForm', () => {
 
   it('should disable form while submitting', async () => {
     const onAdd = vi.fn(
-      () => new Promise((resolve) => setTimeout(resolve, 100))
+      () => new Promise<void>((resolve) => setTimeout(resolve, 100))
     );
     const user = userEvent.setup();
 

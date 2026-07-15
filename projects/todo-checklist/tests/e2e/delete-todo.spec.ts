@@ -2,11 +2,14 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Delete Todo', () => {
   test.beforeEach(async ({ page }) => {
+    // Navigate first: localStorage is origin-scoped, and touching it on the
+    // initial about:blank page throws SecurityError.
     await page.context().clearCookies();
+    await page.goto('/');
     await page.evaluate(() => {
       localStorage.clear();
     });
-    await page.goto('/');
+    await page.reload();
 
     // Create todos to delete
     const input = page.getByPlaceholder('Add a new todo...');
@@ -71,14 +74,17 @@ test.describe('Delete Todo', () => {
 
   test('should edit and then delete a todo', async ({ page }) => {
     // Arrange & Act - Edit first
-    const editButtons = page.getByRole('button', { name: /edit|create|edit_note/i });
+    const editButtons = page.getByRole('button', { name: /edit todo/i });
     await editButtons.first().click();
 
-    const input = page.getByDisplayValue('Delete me');
+    // Scoped to the list item so it can't match the add-todo field above it.
+    // (getByDisplayValue is a Testing Library API and does not exist in Playwright.)
+    const input = page.getByRole('listitem').getByRole('textbox');
+    await expect(input).toHaveValue('Delete me');
     await input.fill('Edited todo');
 
     // Save edit
-    const checkButtons = page.getByRole('button', { name: /check|done/i });
+    const checkButtons = page.getByRole('button', { name: /save todo/i });
     await checkButtons.first().click();
 
     // Verify edit worked

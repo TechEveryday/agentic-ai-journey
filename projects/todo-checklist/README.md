@@ -9,7 +9,7 @@ This is a single-user todo app with create, edit, delete, and complete functiona
 ## Tech Stack
 
 ### Phase 1 (Current)
-- **Frontend**: React 18 + TypeScript
+- **Frontend**: React 19 + TypeScript
 - **UI Library**: Material-UI v5
 - **Build Tool**: Vite 5
 - **Persistence**: Browser localStorage
@@ -17,7 +17,7 @@ This is a single-user todo app with create, edit, delete, and complete functiona
 - **Testing**: Vitest + React Testing Library (unit/integration) + Playwright (E2E)
 
 ### Phase 2 (Planned)
-- **Frontend**: React 18 (unchanged)
+- **Frontend**: React 19 (unchanged)
 - **Backend**: C# .NET 8 Web API with Clean Architecture
 - **Database**: PostgreSQL
 - **ORM**: Entity Framework Core
@@ -25,14 +25,14 @@ This is a single-user todo app with create, edit, delete, and complete functiona
 
 ### Phase 3 (Planned)
 - **Authentication**: JWT (JSON Web Tokens)
-- **Frontend**: React 18 + Auth Context
+- **Frontend**: React 19 + Auth Context
 - **Backend**: .NET API with JWT middleware
 - **Database**: PostgreSQL with UserId associations
 
 ## Getting Started
 
 ### Prerequisites
-- Node.js 18+ (for development)
+- Node.js 20.11.0+ (pinned in .nvmrc — run `nvm use`)
 - npm 8+
 
 ### Installation
