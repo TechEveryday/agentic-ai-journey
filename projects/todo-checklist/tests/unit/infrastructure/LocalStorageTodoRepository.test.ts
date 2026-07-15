@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { LocalStorageTodoRepository } from '@/infrastructure';
 import { createTodo, TodoStatus } from '@/core';
 

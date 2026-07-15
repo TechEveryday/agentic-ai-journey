@@ -2,12 +2,14 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Create Todo', () => {
   test.beforeEach(async ({ page }) => {
-    // Clear localStorage before each test
+    // Navigate first: localStorage is origin-scoped, and touching it on the
+    // initial about:blank page throws SecurityError.
     await page.context().clearCookies();
+    await page.goto('/');
     await page.evaluate(() => {
       localStorage.clear();
     });
-    await page.goto('/');
+    await page.reload();
   });
 
   test('should create a new todo', async ({ page }) => {

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
 import {
   Box,
   Button,
@@ -19,7 +20,7 @@ export function TodoForm({ onAdd, disabled = false }: TodoFormProps) {
   const [error, setError] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     // Validate before submitting
@@ -42,7 +43,7 @@ export function TodoForm({ onAdd, disabled = false }: TodoFormProps) {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
     setError(null); // Clear error on input change
   };

@@ -15,31 +15,35 @@ This project implements **Clean Architecture** as described in Robert C. Martin'
 ### Dependency Graph
 
 ```
-┌─────────────────────────────────┐
-│     Presentation (UI)           │
-│  TodoPage, TodoForm, TodoItem   │
-└──────────────┬──────────────────┘
-               │ depends on
-               ▼
-┌─────────────────────────────────┐
-│     Application (State)         │
+┌─────────────────────────────────┐     ┌─────────────────────────────────┐
+│     Presentation (UI)           │     │   Infrastructure (I/O)          │
+│  TodoPage, TodoForm, TodoItem   │     │  LocalStorageTodoRepository     │
+└──────────────┬──────────────────┘     └──────────────┬──────────────────┘
+               │ depends on                            │ implements
+               ▼                                       │ ITodoRepository from
+┌─────────────────────────────────┐                    │
+│     Application (State)         │◀───────────────────┘
 │   useTodos, ITodoRepository     │
 └──────────────┬──────────────────┘
                │ depends on
                ▼
 ┌─────────────────────────────────┐
-│   Infrastructure (I/O)          │
-│ LocalStorageTodoRepository      │
-└──────────────┬──────────────────┘
-               │ implements interface from
-               ▼
-┌─────────────────────────────────┐
 │        Core (Entities)          │
 │  Todo, TodoStatus, Validators   │
 └─────────────────────────────────┘
+        (no dependencies)
 ```
 
-**Key Rule**: Dependencies point **inward**. `Core` has no dependencies. `Infrastructure` depends on `Core`. `Application` depends on `Core` and `Infrastructure`. `Presentation` depends on everything below it.
+**Key Rule**: Dependencies point **inward**, toward `Core`.
+
+- `Core` depends on nothing.
+- `Application` depends on `Core` only. It **defines** `ITodoRepository`; it never imports Infrastructure.
+- `Infrastructure` depends on `Core` and `Application` — it *implements* an interface the Application owns. This is the dependency inversion that makes storage swappable.
+- `Presentation` depends on `Application` and `Core`.
+
+**Note the direction of the Infrastructure arrow.** Application does *not* depend on Infrastructure — that would defeat the entire point. `LocalStorageTodoRepository` imports `ITodoRepository` from `@/application`, not the reverse. Because the arrow points inward, Phase 2 can drop in an HTTP repository and nothing in Application or Presentation changes.
+
+**The one sanctioned exception**: `TodoPage` (Presentation) instantiates `LocalStorageTodoRepository` (Infrastructure) directly. That's the **composition root** — the single place concrete implementations get wired to interfaces. Keeping it in exactly one place is what keeps the rule meaningful everywhere else.
 
 ### Core Layer (`src/core/`)
 
@@ -103,7 +107,7 @@ export class LocalStorageTodoRepository implements ITodoRepository {
 
 ### Application Layer (`src/application/`)
 
-**Responsibility**: State management and orchestration of the business rules. Bridges Infrastructure and Presentation.
+**Responsibility**: State management and orchestration of the business rules. Owns the `ITodoRepository` contract that Infrastructure implements, and serves Presentation — without importing either.
 
 **Files**:
 - `ITodoRepository.ts` — Interface contract for data access

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import type { KeyboardEvent } from 'react';
 import {
   ListItem,
   ListItemIcon,
@@ -72,7 +73,7 @@ export function TodoItem({
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       handleSaveEdit();
     } else if (e.key === 'Escape') {
@@ -103,6 +104,7 @@ export function TodoItem({
           onClick={handleSaveEdit}
           disabled={isLoading}
           color="primary"
+          aria-label="Save todo"
         >
           <CheckIcon />
         </IconButton>
@@ -110,6 +112,7 @@ export function TodoItem({
           size="small"
           onClick={handleCancelEdit}
           disabled={isLoading}
+          aria-label="Cancel edit"
         >
           <CloseIcon />
         </IconButton>
@@ -126,6 +129,7 @@ export function TodoItem({
             size="small"
             onClick={() => setIsEditing(true)}
             disabled={isLoading}
+            aria-label="Edit todo"
           >
             <EditIcon fontSize="small" />
           </IconButton>
@@ -135,6 +139,7 @@ export function TodoItem({
             onClick={handleDelete}
             disabled={isLoading}
             color="error"
+            aria-label="Delete todo"
           >
             <DeleteIcon fontSize="small" />
           </IconButton>

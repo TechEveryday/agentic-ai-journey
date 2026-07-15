@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import type { Todo } from '@/core';
-import { TodoStatus, validateTodoTitle } from '@/core';
+import { TodoStatus, createTodo, validateTodoTitle } from '@/core';
 import type { ITodoRepository } from './ITodoRepository';
 
 export interface UseTodosReturn {
@@ -49,14 +49,8 @@ export function useTodos(repository: ITodoRepository): UseTodosReturn {
       try {
         setError(null);
 
-        // Create new todo with helper
-        const todo: Todo = {
-          id: crypto.randomUUID(),
-          title: title.trim(),
-          status: TodoStatus.Incomplete,
-          createdAt: new Date().toISOString(),
-          updatedAt: new Date().toISOString(),
-        };
+        // Entity construction belongs to core, not here
+        const todo = createTodo(title);
 
         await repository.save(todo);
         setTodos((prev) => [...prev, todo]);
